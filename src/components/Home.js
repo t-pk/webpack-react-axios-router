@@ -17,14 +17,14 @@ class Home extends React.Component {
 
   handleOnchange = e => {
     this.setState({
-      valueOnchange: e.target.value
+      valueOnchange:      e.target.value
     });
     this.props.reduxTest(e.target.value);
   };
   handeClick = () => {
     actionClick().then(res => {
       this.setState({
-        arrClick: res.data
+        arrClick:         res.data
       });
     });
   };

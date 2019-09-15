@@ -2,8 +2,8 @@ import { fetch } from "../utils/apiCaller";
 import { test } from "../constants";
 
 export const actionTest = data => {
-  return dispatch => {
-    dispatch(saveFilters(data));
+  return  dispatch => {
+          dispatch(saveFilters(data));
   };
 };
 
@@ -15,8 +15,8 @@ export const saveFilters = data => {
 };
 
 export const actionClick = () => {
-  return fetch("http://demo8649914.mockable.io/tai").then(res => {
-    console.log(res);
-    return res;
+  return  fetch("http://demo8649914.mockable.io/tai")
+          .then(res => {
+          return res;
   });
 };
