@@ -6,3 +6,4 @@
 3. npm start / yarn start.
 
 
+4. mock api: https://beeceptor.com
