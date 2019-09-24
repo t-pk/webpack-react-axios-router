@@ -56,6 +56,23 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'less-loader', // compiles Less to CSS
+         options: {
+           modifyVars: {
+             'primary-color': '#ff9c6e',
+             'link-color': '#ff9c6e'
+           },
+           javascriptEnabled: true,
+         },
+        }]
+      }
     ]
   },
   plugins: [
