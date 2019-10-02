@@ -6,7 +6,7 @@
   "plugins": [
               "@babel/plugin-syntax-dynamic-import",
 		          "@babel/plugin-proposal-class-properties",
-              "@babel/transform-runtime",
-              ["import", {"libraryName": "antd", "style": true} ]
+              "@babel/transform-runtime"
+              // ["import", {"libraryName": "antd", "style": true} ] // NOTE error when use file change antd ( .less ) webpack.config.js
   ]
 }

@@ -30,7 +30,7 @@ module.exports = {
             options: {
               modules:          true,
               localsConvention: "camelCase",
-              sourceMap: true
+              sourceMap:        true
             }
           }
         ]
@@ -44,6 +44,14 @@ module.exports = {
           }
         ]
       },
+      {
+        test:                    /\.s[ac]ss$/i,
+        use: [
+                                'style-loader',
+                                'css-loader',
+                                'sass-loader',
+        ],
+      },
 
       {
         test:                    /\.less$/,
@@ -56,8 +64,7 @@ module.exports = {
           loader:                'less-loader',
           options: {
             modifyVars: {
-              'primary-color':   '#ff9c6e',
-              'link-color':      '#ff9c6e'
+              hack:              `true; @import "configTheme.less"`
             },
             javascriptEnabled:    true,
           },
