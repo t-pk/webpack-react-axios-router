@@ -7,10 +7,10 @@ module.exports = {
   mode:                        "development",
   entry:                       ["@babel/polyfill", "./src/index.js"],
   output: {
-    filename:                  "bundle.[hash].js"
+    filename:                  "TaiPham.[hash].js"
   },
   devtool:                     "inline-source-map",
-
+//========================================================
   module: {
     rules: [
       {
@@ -18,7 +18,7 @@ module.exports = {
         exclude:                /node_modules/,
         use:                    ["babel-loader"]
       },
-
+//========================================================
       {
         test:                    /\.css$/,
         use: [
@@ -35,7 +35,7 @@ module.exports = {
           }
         ]
       },
-
+//========================================================
       {
         test:                   /\.(png|jpg|gif)$/,
         use: [
@@ -44,6 +44,7 @@ module.exports = {
           }
         ]
       },
+//========================================================
       {
         test:                    /\.s[ac]ss$/i,
         use: [
@@ -52,7 +53,7 @@ module.exports = {
                                 'sass-loader',
         ],
       },
-
+//========================================================
       {
         test:                    /\.less$/,
         use: [
@@ -73,18 +74,24 @@ module.exports = {
 
     ]
   },
-
+//========================================================
   plugins: [
     new HtmlWebpackPlugin({
       template:                   "public/index.html",
       favicon:                    "public/favicon.png"
     })
   ],
-
+//========================================================
   devServer: {
     host:                         "localhost",
     port:                         port,
     historyApiFallback:           true,
     open:                         true
+  },
+//========================================================
+  performance: {
+    hints:                        false,
+    maxEntrypointSize:            512000,
+    maxAssetSize:                 512000
   }
 };
