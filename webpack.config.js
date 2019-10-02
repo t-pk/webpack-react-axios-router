@@ -4,87 +4,80 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const port = process.env.PORT || 3000;
 
 module.exports = {
-  mode: "development",
-  entry: ["@babel/polyfill", "./src/index.js"],
+  mode:                        "development",
+  entry:                       ["@babel/polyfill", "./src/index.js"],
   output: {
-    filename: "bundle.[hash].js"
+    filename:                  "bundle.[hash].js"
   },
-  devtool: "inline-source-map",
+  devtool:                     "inline-source-map",
+
   module: {
     rules: [
-      // First Rule
       {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"]
+        test:                   /\.(js)$/,
+        exclude:                /node_modules/,
+        use:                    ["babel-loader"]
       },
 
-      // Second Rule
       {
-        test: /\.css$/,
+        test:                    /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader:             "style-loader"
           },
           {
-            loader: "css-loader",
+            loader:             "css-loader",
             options: {
-              modules: true,
+              modules:          true,
               localsConvention: "camelCase",
               sourceMap: true
             }
           }
         ]
       },
+
       {
-        test: /\.(png|jpg|gif)$/,
+        test:                   /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: "file-loader",
-            options: {}
+            loader:             "file-loader"
           }
         ]
       },
+
       {
-        test: /\.s[ac]ss$/i,
+        test:                    /\.less$/,
         use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.less$/,
-        use: [{
-          loader: 'style-loader',
+          {
+          loader:                'style-loader',
         }, {
-          loader: 'css-loader', // translates CSS into CommonJS
+          loader:                'css-loader',
         }, {
-          loader: 'less-loader', // compiles Less to CSS
-         options: {
-           modifyVars: {
-             'primary-color': '#ff9c6e',
-             'link-color': '#ff9c6e'
-           },
-           javascriptEnabled: true,
-         },
+          loader:                'less-loader',
+          options: {
+            modifyVars: {
+              'primary-color':   '#ff9c6e',
+              'link-color':      '#ff9c6e'
+            },
+            javascriptEnabled:    true,
+          },
         }]
       }
+
     ]
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: "public/index.html"
-      // favicon: "public/favicon.ico"
+      template:                   "public/index.html",
+      favicon:                    "public/favicon.png"
     })
   ],
+
   devServer: {
-    host: "localhost",
-    port: port,
-    historyApiFallback: true,
-    open: true
+    host:                         "localhost",
+    port:                         port,
+    historyApiFallback:           true,
+    open:                         true
   }
 };

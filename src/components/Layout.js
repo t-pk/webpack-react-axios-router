@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Divider, Icon } from "antd";
-import { pullRight, h1 } from "./layout.css";
+import { pullRight, h1 } from "./layout.less";
 const { Header } = Layout;
 
 const LayoutP = ({ children }) => {
@@ -18,6 +18,7 @@ const LayoutP = ({ children }) => {
         Made with <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" />{" "}
         by Tai Pham
       </p>
+      <img src="../../src/images/test.jpeg" alt="Paris" className="img"/>
     </div>
   );
 };

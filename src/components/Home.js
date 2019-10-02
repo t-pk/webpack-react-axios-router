@@ -31,7 +31,6 @@ class Home extends React.Component {
 
   render() {
     const { arrClick } = this.state;
-    console.log(arrClick);
     return (
       <LayoutP>
         <p>Hello World of React and Webpack!</p>
