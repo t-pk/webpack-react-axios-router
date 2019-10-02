@@ -6,19 +6,17 @@ const { Header } = Layout;
 
 const LayoutP = ({ children }) => {
   return (
-    <div style={{textAlign: 'center'}}>
-      <Link to="/">
-        <Header as="h1" className="h1">
-          webpack-for-react
+    <div style={{ textAlign: 'center' }}>
+      <Header as="h1" className="h1">
+        webpack-for-react
         </Header>
-      </Link>
       {children}
       <Divider />
       <p className="pullRight">
         Made with <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" />{" "}
         by Tai Pham
       </p>
-      <img src="../../src/images/test.jpeg" alt="Paris" className="img"/>
+      <img src="../../src/images/test.jpeg" alt="Paris" className="img" />
     </div>
   );
 };
