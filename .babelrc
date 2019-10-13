@@ -4,9 +4,9 @@
               "@babel/preset-react"
   ],
   "plugins": [
-              "@babel/plugin-syntax-dynamic-import",
-		          "@babel/plugin-proposal-class-properties",
-              "@babel/transform-runtime"
+              "@babel/transform-runtime",
+	      "@babel/plugin-syntax-dynamic-import",
+	      "@babel/plugin-proposal-class-properties"
               // ["import", {"libraryName": "antd", "style": true} ] // NOTE error when use file change antd ( .less ) webpack.config.js
   ]
 }
