@@ -2,6 +2,7 @@ require("@babel/polyfill");
 require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const port = process.env.PORT || 3000;
+const configTheme = require('./src/configTheme');
 
 module.exports = {
   mode:                        "development",
@@ -64,9 +65,10 @@ module.exports = {
         }, {
           loader:                'less-loader',
           options: {
-            modifyVars: {
-              hack:              `true; @import "configTheme.less"`
-            },
+            modifyVars: 
+              configTheme // if(configTheme.Endpoint === js) => use can .less design UI. reserve use scss.
+              //{hack:      `true; @import "configTheme.less"`}
+            ,
             javascriptEnabled:    true,
           },
         }]
