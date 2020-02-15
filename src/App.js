@@ -14,7 +14,7 @@ const App = () => {
       result = routes.map((route, index) => {
         return route.isPrivate ? (
           <PrivateRoute
-            key={shortid.generate()}
+            key={shortid()}
             path={route.path}
             exact={route.exact}
             component={route.main}
@@ -22,7 +22,7 @@ const App = () => {
           />
         ) : (
           <PublicRoute
-            key={shortid.generate()}
+            key={shortid()}
             path={route.path}
             exact={route.exact}
             component={route.main}
