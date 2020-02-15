@@ -6,6 +6,7 @@ const PrivateRouteMode = ({
   layout: Layout,
   ...rest
 }) => {
+
   return (
     <Route
       {...rest}

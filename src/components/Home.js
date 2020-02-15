@@ -13,7 +13,6 @@ class Home extends React.Component {
       valueOnchange: '',
       arrClick: [],
     };
-    console.log('adasdadasdas');
   }
 
   handleOnchange = e => {

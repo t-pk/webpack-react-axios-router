@@ -14,7 +14,7 @@ const routes = [
     exact: true,
     layout: PublicLayout,
     main: Home,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     path: '/test',
@@ -24,17 +24,11 @@ const routes = [
     isPrivate: true,
   },
   {
-    exact: true,
-    layout: PublicLayout,
-    main: NoMatch,
-    isPrivate: true,
-  },
-  {
     path: '/dynamic',
     exact: true,
-    layout: PrivateLayout,
+    layout: PublicLayout,
     main: DynamicPage,
-    isPrivate: true,
+    isPrivate: false,
   },
 ];
 

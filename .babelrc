@@ -1,12 +1,9 @@
 {
-  "presets": [
-              "@babel/preset-env", 
-              "@babel/preset-react"
-  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-              "@babel/transform-runtime",
-	      "@babel/plugin-syntax-dynamic-import",
-	      "@babel/plugin-proposal-class-properties"
-              // ["import", {"libraryName": "antd", "style": true} ] // NOTE error when use file change antd ( .less ) webpack.config.js
+    "@babel/transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
+    // ["import", {"libraryName": "antd", "style": true} ] // NOTE error when use file change antd ( .less ) webpack.config.js
   ]
 }
