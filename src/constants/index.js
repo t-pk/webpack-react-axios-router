@@ -1,3 +1,3 @@
 export const test = {
-  TEST: "TEST"
+  TEST: 'TEST',
 };

@@ -1,7 +1,7 @@
-import React from "react";
-import { Icon } from "antd";
+import React from 'react';
+import { Icon } from 'antd';
 
-import LayoutP from "./Layout";
+import LayoutP from './Layout';
 
 const NoMatch = () => {
   return (

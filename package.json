@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "format": "prettier --write \"src/**/*.{js,scss}\"",
     "start": "webpack-dev-server",
     "build": "webpack-dev-server --mode production"
   },
