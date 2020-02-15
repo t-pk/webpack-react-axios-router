@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { PrivateLayout } from './layout/PrivateLayout';
 import { PublicLayout } from './layout/PublicLayout';
 

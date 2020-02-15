@@ -1,6 +1,5 @@
 import React from 'react';
 import { Icon } from 'antd';
-
 import LayoutP from './Layout';
 
 const NoMatch = () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Divider, Icon } from 'antd';
 import './layout.scss';
 const { Header } = Layout;
