@@ -1,4 +1,4 @@
-import { test } from "../constants";
+import { test } from '../constants';
 
 export const getTest = (state = [], action) => {
   let { data } = action;
