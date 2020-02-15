@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import shortid from 'shortid';
 import { Button } from 'antd';
 import LayoutP from './Layout';
 import { actionTest, actionClick } from '../actions';
-import shortid from 'shortid';
 
 class Home extends React.Component {
   constructor() {
@@ -16,12 +16,13 @@ class Home extends React.Component {
   }
 
   handleOnchange = e => {
-    let { value } = e.target;
+    const { value } = e.target;
     this.setState({
       valueOnchange: value,
     });
     this.props.reduxTest(value);
   };
+
   handeClick = () => {
     actionClick().then(res => {
       this.setState({

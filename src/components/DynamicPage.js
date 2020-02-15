@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import { Link } from 'react-router-dom';
 import LayoutP from './Layout';
+
 const { Header } = Layout;
 
 const DynamicPage = () => {

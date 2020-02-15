@@ -15,7 +15,7 @@ export const saveFilters = data => {
 };
 
 export const actionClick = () => {
-  return fetch('http://demo8649914.mockable.io/tai').then(res => {
+  return fetch('http://www.mocky.io/v2/5e47d74c300000e5392949ec').then(res => {
     return res;
   });
 };

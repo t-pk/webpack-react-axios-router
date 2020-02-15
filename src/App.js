@@ -4,6 +4,7 @@ import routes from './routes';
 import { history } from './utils/history';
 import { PrivateRoute, PublicRoute } from './layout';
 import { Spin } from 'antd';
+import shortid from 'shortid';
 
 class App extends React.Component {
   showContent = routes => {
@@ -12,7 +13,7 @@ class App extends React.Component {
       result = routes.map((route, index) => {
         return route.isPrivate ? (
           <PrivateRoute
-            key={index}
+            key={shortid.generate()}
             path={route.path}
             exact={route.exact}
             component={route.main}
@@ -20,7 +21,7 @@ class App extends React.Component {
           />
         ) : (
           <PublicRoute
-            key={index}
+            key={shortid.generate()}
             path={route.path}
             exact={route.exact}
             component={route.main}

@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 const configTheme = require('./src/configTheme');
 
 module.exports = {
-  mode:                        "development",
+  mode:                        process.env.mode || "development",
   entry:                       ["@babel/polyfill", "./src/index.js"],
   output: {
     filename:                  "TaiPham.[hash].js"
