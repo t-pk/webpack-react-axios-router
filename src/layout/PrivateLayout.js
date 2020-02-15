@@ -3,6 +3,6 @@ import { Layout } from 'antd';
 
 export const PrivateLayout = props => (
   <Layout>
-      <>{props.children}</>
+    <>{props.children}</>
   </Layout>
 );

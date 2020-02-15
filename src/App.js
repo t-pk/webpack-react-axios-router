@@ -1,14 +1,15 @@
 import React, { Suspense } from 'react';
-import { Switch, Router, Route } from 'react-router-dom';
+import { Switch, Router } from 'react-router-dom';
+import { Spin } from 'antd';
+import shortid from 'shortid';
 import routes from './routes';
 import { history } from './utils/history';
 import { PrivateRoute, PublicRoute } from './layout';
-import { Spin } from 'antd';
-import shortid from 'shortid';
 
-class App extends React.Component {
-  showContent = routes => {
+const App = () => {
+  const showContent = routes => {
     let result = null;
+
     if (routes.length > 0) {
       result = routes.map((route, index) => {
         return route.isPrivate ? (
@@ -30,6 +31,7 @@ class App extends React.Component {
         );
       });
     }
+
     return (
       <Switch>
         <Suspense
@@ -44,10 +46,7 @@ class App extends React.Component {
       </Switch>
     );
   };
-
-  render() {
-    return <Router history={history}> {this.showContent(routes)} </Router>;
-  }
-}
+  return <Router history={history}> {showContent(routes)} </Router>;
+};
 
 export default App;
