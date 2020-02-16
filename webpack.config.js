@@ -1,145 +1,147 @@
-require("@babel/polyfill");
-require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const port = process.env.PORT || 3000;
-const configTheme = require('./src/configTheme');
+require('@babel/polyfill');
+require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const customizeTheme = require('./src/customizeTheme');
 const packageJson = require('./package.json');
 const regexParser = require('regex-parser');
 const shortid = require('shortid');
+const port = process.env.PORT || 3000;
 
 module.exports = {
-  mode: process.env.mode || "development",
-  entry: ["@babel/polyfill", "./src/index.js"],
+  mode: process.env.MODE || 'development',
+  entry: ['@babel/polyfill', './src/index.js'],
 
   output: {
-    filename: "TaiPham.[hash].js",
+    filename: 'TaiPham.[hash].js',
     chunkFilename: '[name].[chunkhash].bundle.js',
     publicPath: '/',
   },
 
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   //========================================================
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ['babel-loader'],
       },
       //========================================================
       {
         test: /\.css$/,
-        use: [{
-            loader: "style-loader"
+        use: [
+          {
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: true,
-              localsConvention: "camelCase",
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      //========================================================
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: "file-loader"
-        }]
-      },
-      //========================================================
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+              localsConvention: 'camelCase',
+              sourceMap: true,
+            },
+          },
         ],
       },
       //========================================================
       {
-        test: /\.less$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'less-loader',
-          options: {
-            modifyVars: configTheme // if(configTheme.Endpoint === js) => use can .less design UI. reserve use scss.
-              //{hack:      `true; @import "configTheme.less"`}
-              ,
-            javascriptEnabled: true,
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
           },
-        }]
-      }
-
-    ]
+        ],
+      },
+      //========================================================
+      {
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      //========================================================
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              modifyVars: customizeTheme, // if(customizeTheme.Endpoint === js) => use can .less design UI. reserve use scss.
+              //{hack:      `true; @import "customizeTheme.less"`}
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   //========================================================
   plugins: [
     new HtmlWebpackPlugin({
-      template: "public/index.html",
-      favicon: "public/favicon.png"
-    })
+      template: 'public/index.html',
+      favicon: 'public/favicon.png',
+    }),
   ],
   //========================================================
   devServer: {
-    host: "localhost",
+    host: 'localhost',
     port: port,
     historyApiFallback: true,
-    open: true
+    open: true,
   },
   //========================================================
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxAssetSize: 512000,
   },
-  //!tao ra 1 function sau do loop file package.json roi return ve object bo vao day.
+
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       maxInitialRequests: Infinity,
       minSize: 0,
-      cacheGroups: chunkNodeModule()
+      cacheGroups: chunkNodeModule(),
     },
-  }
+  },
 };
-
 
 function chunkNodeModule() {
   let regex = `/[\\\\/]node_modules[\\\\/]({values})[\\\\/]/`;
   let dependencies = Object.keys(packageJson.dependencies);
   let devDependencies = Object.keys(packageJson.devDependencies);
-  let objects = {};
-  let reserve = "";
+  let bundles = {};
+  let reserve = '';
+
   if (dependencies.length > 0) {
-    dependencies.map((item, index) => {
-      let a = (regex.replace('{values}', item)).replace();
-      objects['vendor_Chunk_' + shortid()] = {
-        test: regexParser(a),
-        name: "vendor_Chunk_" + shortid()
+    for (let i = 0; i < dependencies.length; i++) {
+      bundles['vendor_Chunk_' + shortid()] = {
+        test: regexParser(regex.replace('{values}', dependencies[i])),
+        name: 'vendor_Chunk_' + shortid(),
       };
-      reserve = reserve.concat(`(!${item})`);
-    })
-
-    if (devDependencies && devDependencies.length > 0) {
-      devDependencies.map((item, index) => {
-        objects['vendor_Dev_' + shortid()] = {
-          test: regexParser(regex.replace('{values}', item)),
-          name: "vendor_Dev_" + shortid()
-        };
-        reserve = reserve.concat(`(!${item})`);
-      })
+      reserve = reserve.concat(`(!${dependencies[i]})`);
     }
-
-    objects.othersVendor = {
-      test: regexParser(regex.replace('({values})', reserve)),
-      name: "othersVendor"
-    }
-    return objects;
   }
+
+  if (devDependencies && devDependencies.length > 0) {
+    for (let i = 0; i < devDependencies.length; i++) {
+      bundles['vendor_Dev_' + shortid()] = {
+        test: regexParser(regex.replace('{values}', devDependencies[i])),
+        name: 'vendor_Dev_' + shortid(),
+      };
+      reserve = reserve.concat(`(!${devDependencies[i]})`);
+    }
+  }
+
+  bundles.othersVendor = {
+    test: regexParser(regex.replace('({values})', reserve)),
+    name: 'othersVendor',
+  };
+
+  return bundles;
 }

@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write \"src/**/*.{js,scss,less}\"",
+    "format": "prettier --write \"./**/*.{js,scss,less,json}\"",
     "start": "webpack-dev-server",
-    "release": "webpack-dev-server --mode production"
+    "start:dev": "webpack-dev-server --mode development --open --hot",
+    "release": "webpack-dev-server --mode production",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "antd": "3.23.5",
