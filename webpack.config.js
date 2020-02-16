@@ -5,7 +5,10 @@ const customizeTheme = require('./src/customizeTheme');
 const packageJson = require('./package.json');
 const regexParser = require('regex-parser');
 const shortid = require('shortid');
+const fs = require('fs');
 const port = process.env.PORT || 3000;
+
+const typeBundle = 1; // 1 read dir node_modules, !1 read file package.json.
 
 module.exports = {
   mode: process.env.MODE || 'development',
@@ -20,8 +23,7 @@ module.exports = {
   devtool: 'inline-source-map',
   //========================================================
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
@@ -29,8 +31,7 @@ module.exports = {
       //========================================================
       {
         test: /\.css$/,
-        use: [
-          {
+        use: [{
             loader: 'style-loader',
           },
           {
@@ -46,11 +47,9 @@ module.exports = {
       //========================================================
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        use: [{
+          loader: 'file-loader',
+        }, ],
       },
       //========================================================
       {
@@ -60,8 +59,7 @@ module.exports = {
       //========================================================
       {
         test: /\.less$/,
-        use: [
-          {
+        use: [{
             loader: 'style-loader',
           },
           {
@@ -102,11 +100,29 @@ module.exports = {
 
   optimization: {
     runtimeChunk: 'single',
+    //! select one in two.
+    // splitChunks: {
+    //   chunks: 'all',
+    //   maxInitialRequests: Infinity,
+    //   minSize: 0,
+    //   cacheGroups: chunkNodeModule(),
+    // },
     splitChunks: {
-      chunks: 'all',
-      maxInitialRequests: Infinity,
-      minSize: 0,
-      cacheGroups: chunkNodeModule(),
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          // cacheGroupKey here is `commons` as the key of the cacheGroup
+          name(module, chunks, cacheGroupKey  ) {
+            module.identifier().split('/').reduceRight(item => item);
+            chunks.map((item) => item.name).join('~');
+            return `${shortid()}`;
+          },
+          chunks: 'all'
+        },
+        react: {
+          automaticNamePrefix: 'react-chunks-prefix'
+        }
+      }
     },
   },
 };
@@ -117,25 +133,45 @@ function chunkNodeModule() {
   let devDependencies = Object.keys(packageJson.devDependencies);
   let bundles = {};
   let reserve = '';
+  //======================================================================
 
-  if (dependencies.length > 0) {
-    for (let i = 0; i < dependencies.length; i++) {
-      bundles['vendor_Chunk_' + shortid()] = {
-        test: regexParser(regex.replace('{values}', dependencies[i])),
-        name: 'vendor_Chunk_' + shortid(),
-      };
-      reserve = reserve.concat(`(!${dependencies[i]})`);
+  if (typeBundle === 1) {
+    let dir = fs.readdirSync(process.cwd() + '\\node_modules');
+    if (dir.length > 0) {
+      for (let i = 0; i < dir.length; i++) {
+        bundles['vendor_Chunk_' + shortid()] = {
+          test: regexParser(regex.replace('{values}', dir[i])),
+          name: 'vendor_Chunk_' + shortid(),
+        };
+        reserve = reserve.concat(`(!${dir[i]})`);
+      }
     }
-  }
+  } else {
+    if (dependencies.length > 0) {
+      for (let i = 0; i < dependencies.length; i++) {
+        bundles['vendor_Chunk_' + shortid()] = {
+          test: regexParser(regex.replace('{values}', dependencies[i])),
+          name: 'vendor_Chunk_' + shortid(),
+        };
+        reserve = reserve.concat(`(!${dependencies[i]})`);
+      }
+    }
 
-  if (devDependencies && devDependencies.length > 0) {
-    for (let i = 0; i < devDependencies.length; i++) {
-      bundles['vendor_Dev_' + shortid()] = {
-        test: regexParser(regex.replace('{values}', devDependencies[i])),
-        name: 'vendor_Dev_' + shortid(),
-      };
-      reserve = reserve.concat(`(!${devDependencies[i]})`);
+    if (devDependencies && devDependencies.length > 0) {
+      for (let i = 0; i < devDependencies.length; i++) {
+        bundles['vendor_Dev_' + shortid()] = {
+          test: regexParser(regex.replace('{values}', devDependencies[i])),
+          name: 'vendor_Dev_' + shortid(),
+        };
+        reserve = reserve.concat(`(!${devDependencies[i]})`);
+      }
     }
+
+    bundles.lodashVendor = {
+      test: regexParser(regex.replace('({values})', 'lodash')),
+      name: 'lodashVendor',
+    };
+    reserve = reserve.concat(`(!lodash)`);
   }
 
   bundles.othersVendor = {
