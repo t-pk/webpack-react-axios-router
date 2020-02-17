@@ -19,12 +19,14 @@ module.exports = {
     chunkFilename: '[name].[chunkhash].bundle.js',
     publicPath: '/',
   },
-
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   devtool: 'inline-source-map',
   //========================================================
   module: {
     rules: [{
-        test: /\.(js)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
@@ -113,8 +115,8 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           // cacheGroupKey here is `commons` as the key of the cacheGroup
           name(module, chunks, cacheGroupKey  ) {
-            module.identifier().split('/').reduceRight(item => item);
-            chunks.map((item) => item.name).join('~');
+            // module.identifier().split('/').reduceRight(item => item);
+            // chunks.map((item) => item.name).join('~');
             return `${shortid()}`;
           },
           chunks: 'all'
