@@ -11,7 +11,7 @@
     "start": "webpack-dev-server",
     "start:dev": "webpack-dev-server --mode development --open --hot",
     "release": "webpack-dev-server --mode production",
-    "build": "webpack --mode production"
+    "build": "webpack-dev-server --mode production"
   },
   "dependencies": {
     "antd": "3.23.5",
