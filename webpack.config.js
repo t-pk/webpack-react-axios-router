@@ -20,12 +20,13 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   devtool: 'inline-source-map',
   //========================================================
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
@@ -33,7 +34,8 @@ module.exports = {
       //========================================================
       {
         test: /\.css$/,
-        use: [{
+        use: [
+          {
             loader: 'style-loader',
           },
           {
@@ -49,19 +51,33 @@ module.exports = {
       //========================================================
       {
         test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: 'file-loader',
-        }, ],
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
-      //========================================================
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
+      //========================================================
+      // {
+      //   test: /\.s[ac]ss$/i,
+      //   use: ['style-loader', 'css-loader', 'sass-loader'],
+      // },
       //========================================================
       {
         test: /\.less$/,
-        use: [{
+        use: [
+          {
             loader: 'style-loader',
           },
           {
@@ -114,17 +130,17 @@ module.exports = {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           // cacheGroupKey here is `commons` as the key of the cacheGroup
-          name(module, chunks, cacheGroupKey  ) {
+          name(module, chunks, cacheGroupKey) {
             // module.identifier().split('/').reduceRight(item => item);
             // chunks.map((item) => item.name).join('~');
             return `${shortid()}`;
           },
-          chunks: 'all'
+          chunks: 'all',
         },
         react: {
-          automaticNamePrefix: 'react-chunks-prefix'
-        }
-      }
+          automaticNamePrefix: 'react-chunks-prefix',
+        },
+      },
     },
   },
 };
