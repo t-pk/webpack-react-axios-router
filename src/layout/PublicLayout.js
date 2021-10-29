@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Spin } from 'antd';
 
-export const PublicLayout = props => (
+export const PublicLayout = (props) => (
   <Suspense
     fallback={
       <Spin>

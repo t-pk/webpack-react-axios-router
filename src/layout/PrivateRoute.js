@@ -9,7 +9,7 @@ const PrivateRouteMode = ({
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         localStorage.getItem('token') ? (
           <Layout>
             <Component {...props} />

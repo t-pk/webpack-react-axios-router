@@ -8,7 +8,7 @@ export const PublicRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props => (
+    render={(props) => (
       <Layout>
         <Component {...props} />
       </Layout>
