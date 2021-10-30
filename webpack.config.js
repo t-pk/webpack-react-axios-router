@@ -22,7 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
-  devtool: 'inline-source-map',
+  devtool: 'hidden-source-map',
   //========================================================
   module: {
     rules: [
@@ -43,14 +43,14 @@ module.exports = {
             options: {
               modules: true,
               localsConvention: 'camelCase',
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],
       },
       //========================================================
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|jpeg)$/,
         use: [
           {
             loader: 'file-loader',

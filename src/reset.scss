@@ -1,0 +1,85 @@
+@import './scss/_config';
+@import './scss/_mixins';
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $c-primary;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: $f-family;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+.m-b-5 {
+  margin-top: 5px;
+}
+
+.m-b-10 {
+  margin-top: 10px;
+}
+
+.m-b-15 {
+  margin-top: 15px;
+}
+
+.m-l-5 {
+  margin-left: 5px;
+}
+
+.m-l-10 {
+  margin-left: 10px;
+}
+
+.m-l-15 {
+  margin-left: 15px;
+}
+
+b,
+strong {
+  font-weight: 600;
+}
+
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

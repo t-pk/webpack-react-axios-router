@@ -1,0 +1,33 @@
+#login-content {
+  display: -webkit-flex;
+  height: 80vh;
+  -webkit-align-items: center;
+  align-items: center;
+  min-height: 400px;
+  background-repeat: no-repeat;
+  background-position: center 110px;
+  background-size: 100%;
+}
+
+.login-wrap {
+  width: 330px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px #ccc;
+}
+
+.login-button {
+  width: 100%;
+}
+
+.logo-login {
+  width: 80px;
+  display: block;
+  margin: 0 auto 15px;
+}
+
+.logo-name {
+  text-align: center;
+}

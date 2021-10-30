@@ -1,33 +1,38 @@
 import React from 'react';
-import { PrivateLayout } from './layout/PrivateLayout';
-import { PublicLayout } from './layout/PublicLayout';
 
-const Home = React.lazy(() => import('./components/Home'));
-const Test = React.lazy(() => import('./components/Test'));
-const NoMatch = React.lazy(() => import('./components/NoMatch'));
-const DynamicPage = React.lazy(() => import('./components/DynamicPage'));
+import PrivateLayout from './layouts/PrivateLayout';
+import PublicLayout from './layouts/PublicLayout';
+
+const LoginPage = React.lazy(() => import('./pages/login'));
+const HomePage = React.lazy(() => import('./pages/home'));
+const AccountPage = React.lazy(() => import('./pages/account'));
+const NotFoundPage = React.lazy(() => import('./pages/not-found'));
 
 const routes = [
   {
     path: '/',
     exact: true,
-    layout: PublicLayout,
-    main: Home,
-    isPrivate: false,
-  },
-  {
-    path: '/test',
-    exact: true,
     layout: PrivateLayout,
-    main: Test,
+    main: HomePage,
     isPrivate: true,
   },
   {
-    path: '/dynamic',
+    path: '/account',
+    exact: true,
+    layout: PrivateLayout,
+    main: AccountPage,
+    isPrivate: true,
+  },
+  {
+    path: '/login',
     exact: true,
     layout: PublicLayout,
-    main: DynamicPage,
-    isPrivate: false,
+    main: LoginPage,
+  },
+  {
+    path: '*',
+    layout: PublicLayout,
+    main: NotFoundPage,
   },
 ];
 
