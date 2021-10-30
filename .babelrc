@@ -1,10 +1,4 @@
 {
-  "presets": ["@babel/env", "@babel/preset-react"],
-  "plugins": [
-    "@babel/plugin-transform-runtime",
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-modules-commonjs"
-    // ["import", {"libraryName": "antd", "style": true} ] // NOTE error when use file change antd ( .less ) webpack.config.js
-  ]
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [["import", { "libraryName": "antd", "style": true }]]
 }
