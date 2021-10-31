@@ -3,7 +3,7 @@ import UserItem from './userItem';
 
 const mapStateToProps = (state, { user }) => {
   return {
-    name: user.name,
+    fullName: user.fullName,
     id: user.id,
     email: user.email,
   };

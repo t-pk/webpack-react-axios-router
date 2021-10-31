@@ -39,7 +39,7 @@ UserListContainer.propTypes = {
   onGetUser: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       user: PropTypes.string,
     }),
   ),
