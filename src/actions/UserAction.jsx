@@ -9,7 +9,7 @@ export const fetchUsersSuccess = makeActionCreator(
 
 export const actGetUser = () => {
   return async (dispatch) => {
-    return fetchApi('https://jsonplaceholder.typicode.com/users', 'GET').then(
+    return fetchApi('https://run.mocky.io/v3/2f41b55d-45d3-4fcb-95d5-3a49aefe6bf1', 'GET').then(
       (response) => {
         let a = [];
         let index = 0;
@@ -17,7 +17,7 @@ export const actGetUser = () => {
           a.push(response.data[index]);
           index++;
           dispatch(fetchUsersSuccess(a));
-        }, 3000);
+        }, 300);
 
         return true;
       },

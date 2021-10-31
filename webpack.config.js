@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const customizeTheme = require('./src/customizeTheme');
+const path = require('path');
 
 const port = process.env.PORT || 3000;
 
@@ -9,9 +10,10 @@ module.exports = {
   entry: ['@babel/polyfill', './src/index.jsx'],
 
   output: {
-    filename: 'TaiPham.[hash].js',
-    chunkFilename: '[name].[chunkhash].bundle.js',
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash:8].js',
+    sourceMapFilename: '[name].[hash:8].map',
+    chunkFilename: '[id].[hash:8].js',
   },
 
   resolve: {
@@ -85,9 +87,14 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  // optimization: {
-  //   runtimeChunk: {
-  //     name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
-  //   },
-  // },
+
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+      },
+    },
+  },
 };
